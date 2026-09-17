@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>応用情報 一問一答</title>
+<meta name="description" content="応用情報技術者試験（午前）の頻出テーマを赤シート式の一問一答で覚える暗記カード">
+<meta name="theme-color" content="#F3F5F9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1322" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Roboto+Mono:wght@500&display=swap">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px)}
+:root{
+  --ground:#F3F5F9; --surface:#FFFFFF; --ink:#18203A; --muted:#5F6780; --line:#DDE2EC;
+  --navy:#23305E; --navy-ink:#FFFFFF; --sheet:#D8402F; --sheet-soft:#FBE4E0; --sheet-ink:#FFFFFF;
+  --ok:#1E7F5A; --ok-soft:#DDF1E8; --ok-ink:#FFFFFF; --track:#E6EAF2;
+  --t:#2F5BD3; --m:#8A4FC4; --s:#C27A12;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1322; --surface:#181E33; --ink:#E7EAF4; --muted:#9AA2BC; --line:#2A3250;
+    --navy:#8FA3F0; --navy-ink:#0F1322; --sheet:#F07563; --sheet-soft:#3A2024; --sheet-ink:#1C0D0A;
+    --ok:#4CC596; --ok-soft:#173428; --ok-ink:#0F1322; --track:#262E49;
+    --t:#7D9BF5; --m:#C39AF0; --s:#EDB45A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1322; --surface:#181E33; --ink:#E7EAF4; --muted:#9AA2BC; --line:#2A3250;
+  --navy:#8FA3F0; --navy-ink:#0F1322; --sheet:#F07563; --sheet-soft:#3A2024; --sheet-ink:#1C0D0A;
+  --ok:#4CC596; --ok-soft:#173428; --ok-ink:#0F1322; --track:#262E49;
+  --t:#7D9BF5; --m:#C39AF0; --s:#EDB45A; color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0; background:var(--ground); color:var(--ink);
+  font-family:"BIZ UDPGothic","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+button{font:inherit; color:inherit}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--navy); outline-offset:2px}
+.num{font-family:"Roboto Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.wrap{max-width:600px; margin:0 auto; padding-inline:16px; padding-block:18px 40px}
+
+/* home */
+.top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px}
+h1{margin:0; font-size:22px; line-height:1.3; letter-spacing:.02em; text-wrap:balance}
+.sub{margin:2px 0 0; font-size:12.5px; color:var(--muted)}
+.mastery{text-align:right; white-space:nowrap}
+.mastery b{font-size:26px; color:var(--navy); font-weight:500}
+.mastery small{display:block; font-size:12px; color:var(--muted)}
+.meter{height:8px; border-radius:99px; background:var(--track); overflow:hidden; margin-top:14px; display:flex}
+.meter i{display:block; height:100%}
+.meter .a{background:var(--ok)} .meter .b{background:var(--navy); opacity:.45}
+.legend{display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin-top:6px}
+.legend span::before{content:""; display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:5px; vertical-align:0}
+.legend .la::before{background:var(--ok)} .legend .lb::before{background:var(--navy); opacity:.45} .legend .lc::before{background:var(--track)}
+
+.start{margin-top:18px; width:100%; border:0; border-radius:14px; background:var(--navy); color:var(--navy-ink);
+  padding:16px 18px; display:flex; justify-content:space-between; align-items:center; gap:12px; cursor:pointer; text-align:left}
+.start strong{font-size:18px; display:block}
+.start span{font-size:13px; opacity:.85}
+.start .go{font-size:24px; line-height:1}
+.start:disabled{opacity:.5; cursor:default}
+.quick{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
+.qbtn{border:1px solid var(--line); background:var(--surface); border-radius:12px; padding:12px 14px; text-align:left; cursor:pointer}
+.qbtn strong{display:block; font-size:15px}
+.qbtn span{font-size:12px; color:var(--muted)}
+.qbtn:disabled{opacity:.45; cursor:default}
+
+h2{font-size:15px; margin:26px 0 8px; display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+h2 .hint{font-size:12px; color:var(--muted); font-weight:400}
+.group{background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; margin-bottom:10px}
+.ghead{display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-bottom:1px solid var(--line)}
+.gname{font-weight:700; font-size:14px; display:flex; align-items:center; gap:8px}
+.gname::before{content:""; width:10px; height:10px; border-radius:3px; background:var(--gc)}
+.gtoggle{border:0; background:none; color:var(--muted); font-size:12.5px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:4px}
+.cat{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:4px 12px; padding:10px 14px; border-top:1px solid var(--line); cursor:pointer}
+.cat:first-of-type{border-top:0}
+.cat input{width:20px; height:20px; accent-color:var(--navy); margin:0}
+.cat .cn{font-size:14.5px}
+.cat .cc{font-size:12px; color:var(--muted)}
+.cat .bar{grid-column:2 / 4; height:5px; border-radius:99px; background:var(--track); overflow:hidden; display:flex}
+.cat .bar i{height:100%; display:block}
+.cat.off .cn,.cat.off .cc{opacity:.5}
+
+.settings{margin-top:22px; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:4px 14px}
+.settings summary{cursor:pointer; padding:10px 0; font-weight:700; font-size:14px}
+.row{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 0; border-top:1px solid var(--line); font-size:14px}
+.row select{font:inherit; font-size:15px; padding:6px 8px; border-radius:8px; border:1px solid var(--line); background:var(--ground); color:var(--ink)}
+.danger{border:1px solid var(--sheet); color:var(--sheet); background:transparent; border-radius:8px; padding:6px 12px; cursor:pointer; font-size:13px}
+.linkish{border:0; background:none; color:var(--navy); text-decoration:underline; text-underline-offset:3px; cursor:pointer; padding:4px 0; font-size:14px}
+.note{font-size:12px; color:var(--muted); margin-top:18px; line-height:1.7}
+.note p{margin:0 0 6px}
+
+/* study */
+.study{min-height:100%; display:flex; flex-direction:column}
+.sbar{position:sticky; top:env(safe-area-inset-top,0px); background:var(--ground); z-index:2; padding:10px 16px 8px}
+.sbar-in{max-width:600px; margin:0 auto; display:flex; align-items:center; gap:12px}
+.close{border:0; background:var(--surface); border:1px solid var(--line); width:38px; height:38px; border-radius:10px; font-size:20px; line-height:1; cursor:pointer; flex:none}
+.prog{flex:1; height:6px; border-radius:99px; background:var(--track); overflow:hidden}
+.prog i{display:block; height:100%; background:var(--navy); transition:width .25s}
+.count{font-size:13px; color:var(--muted); white-space:nowrap}
+.stage{flex:1; max-width:600px; width:100%; margin:0 auto; padding:6px 16px 16px; box-sizing:border-box; display:flex; flex-direction:column; gap:12px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px 18px 16px; box-shadow:0 1px 0 var(--line)}
+.chip{display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); border:1px solid var(--line); border-radius:99px; padding:2px 10px}
+.chip::before{content:""; width:8px; height:8px; border-radius:2px; background:var(--gc)}
+.chip.new{border-color:var(--navy); color:var(--navy)}
+.chip.new::before{display:none}
+.chips{display:flex; gap:6px; flex-wrap:wrap}
+.q{font-size:20px; font-weight:700; line-height:1.55; margin:12px 0 0; text-wrap:pretty; overflow-wrap:anywhere}
+
+/* the red sheet: covers the answer until lifted */
+.answer{position:relative; margin-top:16px; border-radius:12px; min-height:112px}
+.answer .inner{padding:14px 16px; border-radius:12px; background:var(--sheet-soft)}
+.a{font-size:17px; font-weight:700; color:var(--sheet); line-height:1.6; overflow-wrap:anywhere}
+.n{font-size:14px; color:var(--ink); margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); overflow-wrap:anywhere}
+.sheet{position:absolute; inset:0; border:0; border-radius:12px; cursor:pointer; color:var(--sheet-ink);
+  background:repeating-linear-gradient(135deg, rgba(0,0,0,.05) 0 8px, transparent 8px 16px), var(--sheet);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; font-weight:700; font-size:16px;
+  box-shadow:0 6px 18px rgba(216,64,47,.25); transition:transform .28s ease, opacity .28s ease}
+.sheet small{font-weight:400; font-size:12px; opacity:.9}
+.lifted .sheet{transform:translateY(-12px) rotate(-2deg); opacity:0; pointer-events:none}
+@media (prefers-reduced-motion: reduce){ .sheet{transition:none} .prog i{transition:none} }
+
+.grade{display:grid; grid-template-columns:1fr 1fr; gap:10px; position:sticky; bottom:0; padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px)); background:var(--ground)}
+.gbtn{border-radius:14px; padding:14px 10px; font-size:17px; font-weight:700; cursor:pointer; border:2px solid transparent}
+.gbtn small{display:block; font-size:11.5px; font-weight:400; opacity:.85}
+.gbtn.no{background:var(--surface); border-color:var(--sheet); color:var(--sheet)}
+.gbtn.yes{background:var(--ok); color:var(--ok-ink)}
+.gbtn:disabled{opacity:.35; cursor:default}
+.kbd{font-size:11.5px; color:var(--muted); text-align:center; margin:0}
+
+/* summary */
+.sum{max-width:600px; margin:0 auto; padding:28px 16px}
+.sum h2{font-size:22px; margin:0 0 4px; display:block}
+.stats3{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:18px 0}
+.stat{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px; text-align:center}
+.stat b{display:block; font-size:26px; font-weight:500}
+.stat span{font-size:12px; color:var(--muted)}
+.stat.ok b{color:var(--ok)} .stat.ng b{color:var(--sheet)}
+.misslist{list-style:none; padding:0; margin:0; background:var(--surface); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.misslist li{padding:10px 14px; border-top:1px solid var(--line); font-size:14px}
+.misslist li:first-child{border-top:0}
+.misslist b{color:var(--sheet); display:block; font-size:13.5px}
+.actions{display:flex; flex-direction:column; gap:10px; margin-top:18px}
+.actions .start{margin-top:0}
+.plain{border:1px solid var(--line); background:var(--surface); border-radius:12px; padding:12px; cursor:pointer; font-size:15px}
+
+/* list */
+.lhead{position:sticky; top:env(safe-area-inset-top,0px); background:var(--ground); z-index:2; padding:10px 16px}
+.lhead-in{max-width:600px; margin:0 auto; display:flex; flex-direction:column; gap:8px}
+.lrow{display:flex; gap:8px; align-items:center}
+.lrow input,.lrow select{font:inherit; font-size:16px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:10px; padding:9px 12px; min-width:0}
+.lrow input{flex:1}
+.lrow select{flex:1}
+.litems{list-style:none; margin:0 auto; padding:0 16px 30px; max-width:600px}
+.litems li{background:var(--surface); border:1px solid var(--line); border-radius:12px; margin-bottom:8px}
+.litems details{padding:10px 14px}
+.litems summary{cursor:pointer; font-weight:700; font-size:14.5px; list-style:none; display:flex; gap:8px; align-items:flex-start}
+.litems summary::-webkit-details-marker{display:none}
+.litems summary .lv{flex:none; margin-top:3px; width:28px; font-size:11px; text-align:center; border-radius:6px; padding:1px 0; background:var(--track); color:var(--muted)}
+.litems summary .lv.l3{background:var(--ok-soft); color:var(--ok)}
+.litems summary .lv.lw{background:var(--sheet-soft); color:var(--sheet)}
+.litems .la{color:var(--sheet); font-weight:700; margin-top:8px; font-size:14.5px}
+.litems .ln{font-size:13px; color:var(--muted); margin-top:4px}
+.lcount{font-size:12px; color:var(--muted)}
+.empty{text-align:center; color:var(--muted); padding:40px 0; font-size:14px}
+.toast{position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); background:var(--ink); color:var(--ground); padding:8px 14px; border-radius:10px; font-size:13px; z-index:9; max-width:calc(100% - 32px)}
+</style>
+</head>
+<body>
+<!-- HOME -->
+<main id="home" class="wrap">
+  <div class="top">
+    <div>
+      <h1>応用情報 一問一答</h1>
+      <p class="sub">午前試験の頻出テーマ <span class="num" id="totalCards">0</span> 枚</p>
+    </div>
+    <div class="mastery">
+      <b class="num" id="mastered">0</b>
+      <small>枚 定着</small>
+    </div>
+  </div>
+  <div class="meter" aria-hidden="true"><i class="a" id="mA"></i><i class="b" id="mB"></i></div>
+  <div class="legend"><span class="la">定着</span><span class="lb">学習中</span><span class="lc">未学習</span></div>
+
+  <button class="start" id="startToday">
+    <div><strong>今日の学習を始める</strong><span id="todayInfo">復習 0 枚 ＋ 新しいカード 0 枚</span></div>
+    <div class="go" aria-hidden="true">→</div>
+  </button>
+  <div class="quick">
+    <button class="qbtn" id="startWeak"><strong>苦手だけ</strong><span id="weakInfo">0 枚</span></button>
+    <button class="qbtn" id="startRandom"><strong>ランダム20問</strong><span>選んだ分野から</span></button>
+  </div>
+
+  <h2>出題する分野 <span class="hint" id="selInfo"></span></h2>
+  <div id="groups"></div>
+
+  <button class="linkish" id="openList">カード一覧・検索</button>
+
+  <details class="settings">
+    <summary>設定</summary>
+    <div class="row">
+      <label for="newPerDay">1日の新しいカード</label>
+      <select id="newPerDay">
+        <option value="10">10 枚</option><option value="20">20 枚</option>
+        <option value="30">30 枚</option><option value="50">50 枚</option>
+      </select>
+    </div>
+    <div class="row">
+      <span>学習の記録をリセット</span>
+      <button class="danger" id="resetBtn">リセット</button>
+    </div>
+    <div class="row" id="resetConfirm" hidden>
+      <span>全ての記録を消します。よろしいですか？</span>
+      <span><button class="danger" id="resetYes">消す</button> <button class="linkish" id="resetNo">やめる</button></span>
+    </div>
+    <div class="row" id="installRow" hidden>
+      <span>ホーム画面に追加</span>
+      <button class="linkish" id="installBtn">追加する</button>
+    </div>
+  </details>
+
+  <div class="note">
+    <p>カードは過去問の転載ではなく、直近の午前試験で繰り返し問われているテーマをもとに作った一問一答です（2026年9月時点の内容）。</p>
+    <p>応用情報技術者試験は2026年度にCBT方式で実施され、2027年度から新しい試験制度に移る予定です。最新情報はIPAの試験情報ページで確認してください。</p>
+    <p>学習の記録はこの端末のブラウザに保存されます。</p>
+  </div>
+</main>
+
+<!-- STUDY -->
+<section id="study" class="study" hidden>
+  <div class="sbar"><div class="sbar-in">
+    <button class="close" id="quit" aria-label="学習をやめる">×</button>
+    <div class="prog" aria-hidden="true"><i id="progBar"></i></div>
+    <span class="count num" id="progText">1 / 20</span>
+  </div></div>
+  <div class="stage">
+    <article class="card" id="card">
+      <div class="chips"><span class="chip" id="cardCat"></span><span class="chip new" id="cardNew" hidden>はじめて</span></div>
+      <p class="q" id="cardQ"></p>
+      <div class="answer" id="answer">
+        <div class="inner">
+          <div class="a" id="cardA"></div>
+          <div class="n" id="cardN"></div>
+        </div>
+        <button class="sheet" id="sheet">赤シートをめくる<small>答えを思い浮かべてからタップ</small></button>
+      </div>
+    </article>
+    <div class="grade">
+      <button class="gbtn no" id="gradeNo" disabled>まだ<small>もう一度出す</small></button>
+      <button class="gbtn yes" id="gradeYes" disabled>覚えた<small id="nextHint">次は数日後</small></button>
+    </div>
+    <p class="kbd">キーボード：スペースでめくる ／ ← まだ ／ → 覚えた</p>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section id="summary" hidden>
+  <div class="sum">
+    <h2 id="sumTitle">おつかれさまでした</h2>
+    <p class="sub" id="sumSub"></p>
+    <div class="stats3">
+      <div class="stat"><b class="num" id="sumTotal">0</b><span>解いた枚数</span></div>
+      <div class="stat ok"><b class="num" id="sumOk">0</b><span>1回で覚えた</span></div>
+      <div class="stat ng"><b class="num" id="sumNg">0</b><span>まだだった</span></div>
+    </div>
+    <ul class="misslist" id="missList"></ul>
+    <div class="actions">
+      <button class="start" id="retryMiss"><div><strong>まだだったカードをもう一度</strong><span id="retryInfo"></span></div><div class="go" aria-hidden="true">→</div></button>
+      <button class="plain" id="backHome">ホームに戻る</button>
+    </div>
+  </div>
+</section>
+
+<!-- LIST -->
+<section id="list" hidden>
+  <div class="lhead"><div class="lhead-in">
+    <div class="lrow">
+      <button class="close" id="listBack" aria-label="ホームに戻る">←</button>
+      <input id="search" type="search" placeholder="キーワードで検索（例：稼働率）" aria-label="キーワードで検索">
+    </div>
+    <div class="lrow">
+      <select id="listCat" aria-label="分野で絞り込む"></select>
+      <select id="listState" aria-label="学習状況で絞り込む">
+        <option value="all">すべて</option><option value="weak">苦手</option>
+        <option value="learning">学習中</option><option value="done">定着</option><option value="new">未学習</option>
+      </select>
+    </div>
+    <span class="lcount" id="listCount"></span>
+  </div></div>
+  <ul class="litems" id="listItems"></ul>
+</section>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="cards.js"></script>
+<script>
+(function(){
+  "use strict";
+  const CARDS = window.AP_CARDS || [], CATS = window.AP_CATS || [];
+  const BY_ID = new Map(CARDS.map(c => [c.id, c]));
+  const CAT = new Map(CATS.map(c => [c.k, c]));
+  const GROUP_COLOR = { "テクノロジ":"var(--t)", "マネジメント":"var(--m)", "ストラテジ":"var(--s)" };
+  const INTERVALS = [0, 1, 3, 7, 14, 30];   // days until next review, by box
+  const K_SRS = "ap-srs-v1", K_SET = "ap-set-v1", K_DAY = "ap-day-v1";
+  const $ = (id) => document.getElementById(id);
+
+  // ---------- storage ----------
+  function load(k, fb){ try{ const v = JSON.parse(localStorage.getItem(k)); return v ?? fb; }catch(e){ return fb; } }
+  function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){ toast("記録を保存できませんでした"); } }
+  let srs = load(K_SRS, {});
+  let settings = Object.assign({ cats: CATS.map(c => c.k), newPerDay: 20 }, load(K_SET, {}));
+  let day = load(K_DAY, { date: "", newCount: 0 });
+
+  // ---------- dates ----------
+  function ymd(d){ return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
+  function today(){ return ymd(new Date()); }
+  function addDays(n){ const d = new Date(); d.setDate(d.getDate() + n); return ymd(d); }
+  function newToday(){ return day.date === today() ? day.newCount : 0; }
+
+  // ---------- card state ----------
+  function level(id){ const s = srs[id]; if (!s) return "new"; return s.b >= 3 ? "done" : "learning"; }
+  function isWeak(id){ const s = srs[id]; return !!s && s.w > 0 && s.b <= 2; }
+  function isDue(id){ const s = srs[id]; return !!s && s.d <= today(); }
+  function selected(){ const set = new Set(settings.cats); return CARDS.filter(c => set.has(c.c)); }
+
+  function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+  function pickNew(pool, n){
+    // take new cards round-robin across categories so every chosen field gets covered
+    const byCat = new Map();
+    for (const c of pool) if (!srs[c.id]){ if (!byCat.has(c.c)) byCat.set(c.c, []); byCat.get(c.c).push(c.id); }
+    const lists = [...byCat.values()], out = [];
+    let i = 0;
+    while (out.length < n && lists.some(l => l.length)){
+      const l = lists[i % lists.length]; if (l.length) out.push(l.shift()); i++;
+    }
+    return out;
+  }
+  function todayPlan(){
+    const pool = selected();
+    const due = pool.filter(c => isDue(c.id)).map(c => c.id);
+    const newLeft = Math.max(0, settings.newPerDay - newToday());
+    const fresh = pickNew(pool, newLeft);
+    return { due, fresh };
+  }
+
+  // ---------- home ----------
+  function renderHome(){
+    const total = CARDS.length;
+    let done = 0, learning = 0;
+    for (const c of CARDS){ const l = level(c.id); if (l === "done") done++; else if (l === "learning") learning++; }
+    $("totalCards").textContent = total;
+    $("mastered").textContent = done;
+    $("mA").style.width = (done / total * 100) + "%";
+    $("mB").style.width = (learning / total * 100) + "%";
+
+    const plan = todayPlan();
+    const n = plan.due.length + plan.fresh.length;
+    $("todayInfo").textContent = n ? `復習 ${plan.due.length} 枚 ＋ 新しいカード ${plan.fresh.length} 枚` : (settings.cats.length ? "今日の分は終わりました" : "分野を1つ以上選んでください");
+    $("startToday").disabled = !n;
+    const weak = selected().filter(c => isWeak(c.id)).length;
+    $("weakInfo").textContent = weak + " 枚";
+    $("startWeak").disabled = !weak;
+    $("startRandom").disabled = !settings.cats.length;
+    const selCount = selected().length;
+    $("selInfo").textContent = `${settings.cats.length} 分野・${selCount} 枚`;
+    $("newPerDay").value = String(settings.newPerDay);
+
+    const wrap = $("groups"); wrap.textContent = "";
+    const groups = [...new Set(CATS.map(c => c.g))];
+    for (const g of groups){
+      const box = document.createElement("div");
+      box.className = "group"; box.style.setProperty("--gc", GROUP_COLOR[g]);
+      const cats = CATS.filter(c => c.g === g);
+      const allOn = cats.every(c => settings.cats.includes(c.k));
+      const head = document.createElement("div"); head.className = "ghead";
+      const gn = document.createElement("span"); gn.className = "gname"; gn.textContent = g + "系";
+      const tg = document.createElement("button"); tg.className = "gtoggle"; tg.textContent = allOn ? "すべて外す" : "すべて選ぶ";
+      tg.onclick = () => {
+        const keys = cats.map(c => c.k);
+        settings.cats = allOn ? settings.cats.filter(k => !keys.includes(k)) : [...new Set(settings.cats.concat(keys))];
+        save(K_SET, settings); renderHome();
+      };
+      head.append(gn, tg); box.appendChild(head);
+      for (const c of cats){
+        const ids = CARDS.filter(x => x.c === c.k).map(x => x.id);
+        const d = ids.filter(id => level(id) === "done").length;
+        const l = ids.filter(id => level(id) === "learning").length;
+        const row = document.createElement("label");
+        const on = settings.cats.includes(c.k);
+        row.className = "cat" + (on ? "" : " off");
+        const cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = on; cb.id = "cat-" + c.k;
+        cb.onchange = () => {
+          settings.cats = cb.checked ? [...new Set(settings.cats.concat(c.k))] : settings.cats.filter(k => k !== c.k);
+          save(K_SET, settings); renderHome();
+        };
+        const nm = document.createElement("span"); nm.className = "cn"; nm.textContent = c.name;
+        const ct = document.createElement("span"); ct.className = "cc num"; ct.textContent = `${d} / ${ids.length}`;
+        const bar = document.createElement("span"); bar.className = "bar";
+        bar.innerHTML = `<i style="width:${d/ids.length*100}%;background:var(--ok)"></i><i style="width:${l/ids.length*100}%;background:var(--navy);opacity:.45"></i>`;
+        row.append(cb, nm, ct, bar);
+        box.appendChild(row);
+      }
+      wrap.appendChild(box);
+    }
+  }
+
+  // ---------- study session ----------
+  let S = null;   // {queue, idx, first:Map, requeued:Set, title}
+  function show(view){
+    for (const v of ["home","study","summary","list"]) $(v).hidden = v !== view;
+    window.scrollTo(0, 0);
+  }
+  function startSession(ids, title){
+    if (!ids.length){ toast("出題できるカードがありません"); return; }
+    S = { queue: ids.slice(), idx: 0, first: new Map(), requeued: new Set(), title };
+    show("study"); renderCard();
+  }
+  function renderCard(){
+    const id = S.queue[S.idx], c = BY_ID.get(id), cat = CAT.get(c.c);
+    $("card").style.setProperty("--gc", GROUP_COLOR[cat.g]);
+    $("cardCat").textContent = cat.name;
+    $("cardNew").hidden = !!srs[id];
+    $("cardQ").textContent = c.q;
+    $("cardA").textContent = c.a;
+    $("cardN").textContent = c.n;
+    $("cardN").hidden = !c.n;
+    $("answer").classList.remove("lifted");
+    $("sheet").hidden = false;
+    $("gradeNo").disabled = $("gradeYes").disabled = true;
+    const nb = Math.min((srs[id] ? srs[id].b : 0) + 1, 5);
+    $("nextHint").textContent = `次は${INTERVALS[nb]}日後`;
+    const total = S.queue.length;
+    $("progText").textContent = `${S.idx + 1} / ${total}`;
+    $("progBar").style.width = (S.idx / total * 100) + "%";
+    $("sheet").focus({ preventScroll: true });
+  }
+  function reveal(){
+    if (!S || $("answer").classList.contains("lifted")) return;
+    $("answer").classList.add("lifted");
+    $("gradeNo").disabled = $("gradeYes").disabled = false;
+    setTimeout(() => { if ($("answer").classList.contains("lifted")) $("sheet").hidden = true; }, 300);
+  }
+  function grade(ok){
+    if (!S || $("gradeYes").disabled) return;
+    const id = S.queue[S.idx];
+    const st = srs[id] ? Object.assign({}, srs[id]) : { b: 0, w: 0, r: 0 };
+    if (!srs[id]){
+      if (day.date !== today()) day = { date: today(), newCount: 0 };
+      day.newCount++; save(K_DAY, day);
+    }
+    if (ok){ st.b = Math.min(st.b + 1, 5); st.r++; st.d = addDays(INTERVALS[st.b]); }
+    else { st.b = 0; st.w++; st.d = today(); }
+    srs[id] = st; save(K_SRS, srs);
+    if (!S.first.has(id)) S.first.set(id, ok);
+    if (!ok && !S.requeued.has(id)){ S.requeued.add(id); S.queue.push(id); }
+    S.idx++;
+    if (S.idx >= S.queue.length) finish(); else renderCard();
+  }
+  function finish(){
+    const ids = [...S.first.keys()];
+    const ng = ids.filter(id => !S.first.get(id));
+    $("sumTitle").textContent = ng.length ? "おつかれさまでした" : "全問、1回で覚えました";
+    $("sumSub").textContent = S.title;
+    $("sumTotal").textContent = ids.length;
+    $("sumOk").textContent = ids.length - ng.length;
+    $("sumNg").textContent = ng.length;
+    const ul = $("missList"); ul.textContent = ""; ul.hidden = !ng.length;
+    for (const id of ng){
+      const c = BY_ID.get(id), li = document.createElement("li");
+      const b = document.createElement("b"); b.textContent = c.a;
+      li.append(document.createTextNode(c.q), b);
+      ul.appendChild(li);
+    }
+    $("retryMiss").hidden = !ng.length;
+    $("retryInfo").textContent = ng.length + " 枚";
+    $("retryMiss").onclick = () => startSession(shuffle(ng.slice()), "まだだったカードの復習");
+    S = null;
+    show("summary");
+  }
+
+  // ---------- list ----------
+  function renderListOptions(){
+    const sel = $("listCat");
+    sel.innerHTML = '<option value="all">全分野</option>';
+    for (const c of CATS){ const o = document.createElement("option"); o.value = c.k; o.textContent = c.g + "｜" + c.name; sel.appendChild(o); }
+  }
+  let listTimer = 0;
+  function renderList(){
+    const q = $("search").value.trim().toLowerCase();
+    const cat = $("listCat").value, stf = $("listState").value;
+    const items = CARDS.filter(c => {
+      if (cat !== "all" && c.c !== cat) return false;
+      if (stf === "weak" && !isWeak(c.id)) return false;
+      if (stf !== "all" && stf !== "weak" && level(c.id) !== stf) return false;
+      if (q && !(c.q + c.a + c.n).toLowerCase().includes(q)) return false;
+      return true;
+    });
+    $("listCount").textContent = `${items.length} 枚`;
+    const ul = $("listItems"); ul.textContent = "";
+    if (!items.length){ const li = document.createElement("li"); li.className = "empty"; li.style.border = "0"; li.style.background = "none"; li.textContent = "該当するカードはありません"; ul.appendChild(li); return; }
+    const frag = document.createDocumentFragment();
+    for (const c of items){
+      const li = document.createElement("li");
+      const d = document.createElement("details");
+      const s = document.createElement("summary");
+      const lv = document.createElement("span");
+      const L = level(c.id);
+      lv.className = "lv" + (isWeak(c.id) ? " lw" : L === "done" ? " l3" : "");
+      lv.textContent = isWeak(c.id) ? "苦手" : L === "done" ? "定着" : L === "learning" ? "学習" : "未";
+      const t = document.createElement("span"); t.textContent = c.q;
+      s.append(lv, t);
+      const a = document.createElement("div"); a.className = "la"; a.textContent = c.a;
+      d.append(s, a);
+      if (c.n){ const n = document.createElement("div"); n.className = "ln"; n.textContent = c.n; d.appendChild(n); }
+      li.appendChild(d); frag.appendChild(li);
+    }
+    ul.appendChild(frag);
+  }
+
+  // ---------- misc ----------
+  function toast(msg){
+    const t = $("toast"); t.textContent = msg; t.hidden = false;
+    clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2600);
+  }
+
+  // ---------- wiring ----------
+  $("startToday").onclick = () => {
+    const p = todayPlan();
+    startSession(shuffle(p.due.concat(p.fresh)), "今日の学習");
+  };
+  $("startWeak").onclick = () => startSession(shuffle(selected().filter(c => isWeak(c.id)).map(c => c.id)), "苦手なカード");
+  $("startRandom").onclick = () => startSession(shuffle(selected().map(c => c.id)).slice(0, 20), "ランダム20問");
+  $("sheet").onclick = reveal;
+  $("gradeNo").onclick = () => grade(false);
+  $("gradeYes").onclick = () => grade(true);
+  $("quit").onclick = () => { S = null; renderHome(); show("home"); };
+  $("backHome").onclick = () => { renderHome(); show("home"); };
+  $("openList").onclick = () => { renderList(); show("list"); };
+  $("listBack").onclick = () => { renderHome(); show("home"); };
+  $("search").addEventListener("input", () => { clearTimeout(listTimer); listTimer = setTimeout(renderList, 150); });
+  $("listCat").onchange = renderList;
+  $("listState").onchange = renderList;
+  $("newPerDay").onchange = (e) => { settings.newPerDay = Number(e.target.value) || 20; save(K_SET, settings); renderHome(); };
+  $("resetBtn").onclick = () => { $("resetConfirm").hidden = false; };
+  $("resetNo").onclick = () => { $("resetConfirm").hidden = true; };
+  $("resetYes").onclick = () => {
+    srs = {}; day = { date: "", newCount: 0 };
+    save(K_SRS, srs); save(K_DAY, day);
+    $("resetConfirm").hidden = true; renderHome(); toast("学習の記録をリセットしました");
+  };
+  document.addEventListener("keydown", (e) => {
+    if ($("study").hidden || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key === " " || e.key === "Enter"){ if (!$("answer").classList.contains("lifted")){ e.preventDefault(); reveal(); } }
+    else if (e.key === "ArrowLeft"){ e.preventDefault(); grade(false); }
+    else if (e.key === "ArrowRight"){ e.preventDefault(); grade(true); }
+  });
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && !$("home").hidden) renderHome(); });
+
+  // PWA: offline cache + install button
+  if ("serviceWorker" in navigator && location.protocol !== "file:"){
+    window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+  }
+  if (navigator.storage && navigator.storage.persist){ navigator.storage.persist().catch(() => {}); }
+  let deferred = null;
+  window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferred = e; $("installRow").hidden = false; });
+  $("installBtn").onclick = async () => {
+    if (!deferred) return;
+    deferred.prompt(); try{ await deferred.userChoice; }catch(e){}
+    deferred = null; $("installRow").hidden = true;
+  };
+  window.addEventListener("appinstalled", () => { $("installRow").hidden = true; toast("ホーム画面に追加しました"); });
+
+  renderListOptions();
+  renderHome();
+})();
+</script>
+</body>
+</html>
